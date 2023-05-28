@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Top Down RPG Godot 4 YT Series"
-run/main_scene="res://World.tscn"
+run/main_scene="res://Menus/Main_Menu.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
 

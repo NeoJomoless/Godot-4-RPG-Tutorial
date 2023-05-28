@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckh6jwn6otqxn"]
+
+[ext_resource type="Script" path="res://Menus/PopupPanel.gd" id="1_nnso7"]
+[ext_resource type="Script" path="res://Menus/VideoSettings.gd" id="1_y08sd"]
+[ext_resource type="Script" path="res://Menus/SoundSettings.gd" id="2_8cy0r"]
+[ext_resource type="AudioStream" uid="uid://bd3cmdeqgfy8p" path="res://Audio/togglesound.ogg" id="4_lpcw6"]
+[ext_resource type="AudioStream" uid="uid://bp4vwde2b3nsk" path="res://Audio/Wind.ogg" id="5_mj73n"]
+
+[node name="PopupPanel" type="PopupPanel"]
+size = Vector2i(115, 174)
+visible = true
+script = ExtResource("1_nnso7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 111.0
+offset_bottom = 170.0
+
+[node name="VideoSettings" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_y08sd")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/VideoSettings"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VideoSettings/MarginContainer"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/VideoSettings/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="SoundSettings" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("2_8cy0r")
+sfx_audio_name = "SFX"
+mus_audio_name = "Music"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/SoundSettings"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SoundSettings/MarginContainer"]
+layout_mode = 2
+
+[node name="SFX" type="AudioStreamPlayer" parent="VBoxContainer/SoundSettings/MarginContainer/VBoxContainer"]
+stream = ExtResource("4_lpcw6")
+volume_db = -50.0
+bus = &"SFX"
+
+[node name="Music" type="AudioStreamPlayer" parent="VBoxContainer/SoundSettings/MarginContainer/VBoxContainer"]
+stream = ExtResource("5_mj73n")
+volume_db = -50.0
+bus = &"Music"
+
+[node name="Label" type="Label" parent="VBoxContainer/SoundSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Game Sound"
+
+[node name="GameSlider" type="HSlider" parent="VBoxContainer/SoundSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/SoundSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Music Sound"
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer/SoundSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Done"
+
+[connection signal="toggled" from="VBoxContainer/VideoSettings/MarginContainer/HBoxContainer/CheckBox" to="VBoxContainer/VideoSettings" method="_on_check_box_toggled"]
+[connection signal="value_changed" from="VBoxContainer/SoundSettings/MarginContainer/VBoxContainer/GameSlider" to="VBoxContainer/SoundSettings" method="_on_game_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SoundSettings/MarginContainer/VBoxContainer/MusicSlider" to="VBoxContainer/SoundSettings" method="_on_music_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

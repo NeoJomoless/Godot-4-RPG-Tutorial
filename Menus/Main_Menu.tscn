@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://85ylfce8uhfq"]
+
+[ext_resource type="Script" path="res://Menus/Main_Menu.gd" id="1_nyk0a"]
+[ext_resource type="PackedScene" uid="uid://ckh6jwn6otqxn" path="res://Menus/PopupPanel.tscn" id="1_vsyxs"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nyk0a")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -65.5
+offset_right = 48.5
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Godot 4 RPG"
+
+[node name="Buttons" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Play"
+
+[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Quit"
+
+[node name="PopupPanel" parent="." instance=ExtResource("1_vsyxs")]
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Quit" to="." method="_on_quit_pressed"]
