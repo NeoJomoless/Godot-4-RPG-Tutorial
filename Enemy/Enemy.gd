@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var attackpow = 1
 
 @onready var animTree = $AnimationTree
+@onready var healthbar = $EnemyHealth
 
 var knockback_dir = Vector2.ZERO
 var knockback = Vector2.ZERO
@@ -14,7 +15,11 @@ var see_player = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var player = get_parent().get_node("Player")
+	player.enemy_attacked.connect(change_healthbar)
 	animTree.active = true
+	healthbar.max_value = health
+	healthbar.value = health
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,6 +36,9 @@ func _physics_process(delta):
 	
 	knockback_dir = mov_direction
 	knockback = knockback.move_toward(Vector2.ZERO, 200*delta)
+
+func change_healthbar():
+	healthbar.value = health
 
 func accelerate_towards_point(point, delta):
 	var movement = mov_direction * Speed

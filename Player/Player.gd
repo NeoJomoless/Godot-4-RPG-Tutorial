@@ -16,6 +16,9 @@ var knockback = Vector2(0, 0)
 var is_moving = false
 var is_attacking = false
 
+signal health_changed(value)
+signal enemy_attacked
+
 func _ready():
 	animTree.active = true
 
@@ -80,12 +83,14 @@ func _on_attack_detector_area_entered(area):
 		Health -= area.get_parent().attackpow
 		knockback = knockback.move_toward(Vector2.ZERO, 100)
 		knockback = area.get_parent().knockback_dir * area.get_parent().knockback_strength
+		emit_signal("health_changed", Health)
 
 
 func _on_sword_hitbox_area_entered(area):
 	if area.is_in_group("Enemy"):
 		area.get_parent().knockback = knockback_dir * knockback_strength
 		area.get_parent().health -= attackpow
+		emit_signal("enemy_attacked")
 
 func Death():
 	queue_free()

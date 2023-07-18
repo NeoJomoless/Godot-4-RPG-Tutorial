@@ -22,5 +22,14 @@ editor_description = "This is what hits the player."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
 
+[node name="EnemyHealth" type="ProgressBar" parent="."]
+offset_left = -37.0
+offset_top = -38.0
+offset_right = 38.0
+offset_bottom = -27.0
+max_value = 4.0
+value = 4.0
+show_percentage = false
+
 [connection signal="body_entered" from="AttackDetector" to="." method="_on_attack_detector_body_entered"]
 [connection signal="body_exited" from="AttackDetector" to="." method="_on_attack_detector_body_exited"]
