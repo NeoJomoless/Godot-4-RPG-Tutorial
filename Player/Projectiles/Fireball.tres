@@ -1,0 +1,27 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dgfgyex7c2lks"]
+
+[ext_resource type="Texture2D" uid="uid://depgl8fn7o4iu" path="res://Art/Fireball.png" id="1_mrokb"]
+
+[sub_resource type="GDScript" id="GDScript_ygdh6"]
+script/source = "extends Resource
+
+enum WepChoice {
+	Knife,
+	Spell,
+	Arrow
+}
+
+@export var WeaponClass = WepChoice.Knife
+@export var Speed = 0
+@export var Knockback = 0
+@export var Damage = 0
+@export var image: Texture
+"
+
+[resource]
+script = SubResource("GDScript_ygdh6")
+WeaponClass = 1
+Speed = 150
+Knockback = 50
+Damage = 1
+image = ExtResource("1_mrokb")

@@ -11,6 +11,8 @@ extends CharacterBody2D
 @export var attackpow: int = 1
 @export var knockback_strength = 100
 
+@onready var Projectile = preload("res://Player/Projectiles/Projectile.tscn")
+
 var knockback_dir = Vector2.ZERO
 var knockback = Vector2(0, 0)
 var is_moving = false
@@ -34,7 +36,7 @@ func _physics_process(delta):
 		input_vector.y = Input.get_action_strength("down") - Input.get_action_strength("up") 
 		
 		velocity = input_vector * Speed + knockback
-		
+
 		if input_vector == Vector2.ZERO:
 			animTree.get("parameters/playback").travel("Idle")
 		else:
@@ -45,22 +47,32 @@ func _physics_process(delta):
 			animTree.set("parameters/Attack1/blend_position", input_vector)
 			animTree.set("parameters/Attack2/blend_position", input_vector)
 			animTree.set("parameters/Attack3/blend_position", input_vector)
+			animTree.set("parameters/Cast/blend_position", input_vector) #new for spells and thief attacks
 		move()
 	attack_combo()
 
 func attack_combo():
-	if Input.is_action_just_pressed("attack") and AtkNumber == 3:
-		is_attacking = true
-		AtkTimer.start()
-		animTree.get("parameters/playback").travel("Attack1")
-	if Input.is_action_just_pressed("attack") and AtkNumber == 2:
-		is_attacking = true
-		AtkTimer.start()
-		animTree.get("parameters/playback").travel("Attack2")
-	if Input.is_action_just_pressed("attack") and AtkNumber == 1:
-		is_attacking = true
-		AtkTimer.start()
-		animTree.get("parameters/playback").travel("Attack3")
+	if PlayerData.Class == 1:
+		if Input.is_action_just_pressed("attack") and AtkNumber == 3:
+			is_attacking = true
+			AtkTimer.start()
+			animTree.get("parameters/playback").travel("Attack1")
+		if Input.is_action_just_pressed("attack") and AtkNumber == 2:
+			is_attacking = true
+			AtkTimer.start()
+			animTree.get("parameters/playback").travel("Attack2")
+		if Input.is_action_just_pressed("attack") and AtkNumber == 1:
+			is_attacking = true
+			AtkTimer.start()
+			animTree.get("parameters/playback").travel("Attack3")
+	else: # new---------------------------------------------------------------------------------------
+		if Input.is_action_just_pressed("attack") and is_attacking == false:
+			is_attacking = true
+			AtkTimer.start()
+			animTree.get("parameters/playback").travel("Cast")
+			var instance = Projectile
+			var spawn = instance.instantiate()
+			add_sibling(spawn)
 
 func remove_atknumb():
 	AtkNumber -= 1

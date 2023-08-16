@@ -62,3 +62,10 @@ func _on_attack_detector_body_exited(body):
 
 func Death():
 	queue_free()
+
+
+func _on_attack_box_area_entered(area):
+	if area.is_in_group("Projectile"):
+		var proj = get_parent().get_node("Projectile")
+		if proj != null:
+			proj.enemy_attacked.connect(change_healthbar)

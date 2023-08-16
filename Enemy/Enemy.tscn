@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://d4c6udlvrac8r"]
 
-[ext_resource type="Script" path="res://NPCs/Enemies/Enemy.gd" id="1_r33l2"]
+[ext_resource type="Script" path="res://Enemy/Enemy.gd" id="1_228s6"]
 
 [node name="Enemy" type="CharacterBody2D"]
-script = ExtResource("1_r33l2")
+script = ExtResource("1_228s6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -33,3 +33,4 @@ show_percentage = false
 
 [connection signal="body_entered" from="AttackDetector" to="." method="_on_attack_detector_body_entered"]
 [connection signal="body_exited" from="AttackDetector" to="." method="_on_attack_detector_body_exited"]
+[connection signal="area_entered" from="AttackBox" to="." method="_on_attack_box_area_entered"]

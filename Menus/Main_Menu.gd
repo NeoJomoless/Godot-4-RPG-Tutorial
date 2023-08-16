@@ -5,7 +5,7 @@ extends Control
 
 
 func _on_play_pressed():
-	get_tree().change_scene_to_file("res://World.tscn")
+	get_tree().change_scene_to_file("res://Menus/ClassMenu.tscn")
 
 
 func _on_settings_pressed():

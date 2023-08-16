@@ -2,8 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://dlbxvt1oawb8v" path="res://icon.svg" id="1_2bwge"]
 [ext_resource type="PackedScene" uid="uid://cdkrwn56sckey" path="res://Player/Player.tscn" id="2_epinq"]
-[ext_resource type="PackedScene" uid="uid://btda7wrqs3hhr" path="res://Enemy/Skeleton.tscn" id="3_470w4"]
-[ext_resource type="PackedScene" uid="uid://brpvvboxmmvh4" path="res://Player/PlayerHealthUI.tscn" id="4_a2s8h"]
+[ext_resource type="PackedScene" uid="uid://btda7wrqs3hhr" path="res://Enemy/Skeleton.tscn" id="3_7bxol"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_hxxpg"]
 
 [node name="World" type="Node2D"]
 
@@ -12,10 +13,11 @@ position = Vector2(166, -97)
 texture = ExtResource("1_2bwge")
 
 [node name="Player" parent="." instance=ExtResource("2_epinq")]
-attackpow = 1
 
-[node name="Skeleton" parent="." instance=ExtResource("3_470w4")]
-position = Vector2(-198, -26)
-attackpow = 1
+[node name="AnimationTree" parent="Player" index="4"]
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_hxxpg")
 
-[node name="PlayerHealthUI" parent="." instance=ExtResource("4_a2s8h")]
+[node name="Skeleton" parent="." instance=ExtResource("3_7bxol")]
+position = Vector2(-173, -22)
+
+[editable path="Player"]
