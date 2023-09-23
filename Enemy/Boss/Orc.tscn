@@ -1,8 +1,9 @@
-[gd_scene load_steps=40 format=3 uid="uid://big3l13dnpmd0"]
+[gd_scene load_steps=41 format=3 uid="uid://big3l13dnpmd0"]
 
 [ext_resource type="PackedScene" uid="uid://b3lktxfj7bj78" path="res://Enemy/Boss/BossTemplate.tscn" id="1_qyca1"]
 [ext_resource type="Texture2D" uid="uid://bgt2422ddc61h" path="res://Art/Blue Orc.png" id="2_sll6e"]
 [ext_resource type="Script" path="res://Enemy/Boss/BossTemplate.gd" id="2_ugy1w"]
+[ext_resource type="Script" path="res://Enemy/Boss/SpecialStates.gd" id="3_2noj3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j2wxo"]
 radius = 7.0
@@ -333,39 +334,42 @@ attackpow = 1
 exp_drop = 100
 Boss_Name = "Orc"
 
-[node name="CollisionShape2D" parent="." index="0"]
+[node name="SpecialStates" type="Node" parent="." index="0"]
+script = ExtResource("3_2noj3")
+
+[node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, 12)
 shape = SubResource("CircleShape2D_j2wxo")
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="2"]
 texture = ExtResource("2_sll6e")
 hframes = 23
 frame = 17
 
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" parent="." index="3"]
 libraries = {
 "": SubResource("AnimationLibrary_nmqto")
 }
 
-[node name="AttackProx" type="Area2D" parent="." index="3"]
+[node name="AttackProx" type="Area2D" parent="." index="4"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackProx" index="0"]
 position = Vector2(1, 10)
 shape = SubResource("CircleShape2D_2l03t")
 
-[node name="AttackDetector" parent="." index="4" groups=["Enemy_Attack_Detector"]]
+[node name="AttackDetector" parent="." index="5" groups=["Enemy_Attack_Detector"]]
 
 [node name="CollisionShape2D" parent="AttackDetector" index="0"]
 position = Vector2(1, 8)
 shape = SubResource("CircleShape2D_p2qjs")
 
-[node name="AttackBox" parent="." index="5" groups=["Enemy"]]
+[node name="AttackBox" parent="." index="6" groups=["Enemy"]]
 
 [node name="CollisionShape2D" parent="AttackBox" index="0"]
 position = Vector2(1, 12)
 shape = SubResource("CircleShape2D_p4w03")
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="6"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="7"]
 tree_root = SubResource("AnimationNodeStateMachine_q5jrg")
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_pdvvy")
@@ -373,7 +377,7 @@ parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Special/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(0, 0)
 
-[node name="Ground_SlamBox" type="Area2D" parent="." index="7" groups=["Enemy"]]
+[node name="Ground_SlamBox" type="Area2D" parent="." index="8" groups=["Enemy"]]
 position = Vector2(1, 8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground_SlamBox" index="0"]
@@ -381,10 +385,10 @@ position = Vector2(-1, 3)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_35oqa")
 
-[node name="SpecialTimer" type="Timer" parent="." index="8"]
+[node name="SpecialTimer" type="Timer" parent="." index="9"]
 wait_time = 2.0
 autostart = true
 
 [connection signal="body_entered" from="AttackProx" to="." method="_on_attack_prox_body_entered"]
 [connection signal="body_exited" from="AttackProx" to="." method="_on_attack_prox_body_exited"]
-[connection signal="timeout" from="SpecialTimer" to="." method="_on_special_timer_timeout"]
+[connection signal="timeout" from="SpecialTimer" to="SpecialStates" method="_on_special_timer_timeout"]

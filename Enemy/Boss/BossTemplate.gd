@@ -86,9 +86,3 @@ func _on_attack_prox_body_entered(body):
 func _on_attack_prox_body_exited(body):
 	if body.name == "Player":
 		player_inprox = false
-
-
-func _on_special_timer_timeout():
-	if player_inprox:
-		specialtimer.start()
-		animTree.get("parameters/playback").travel("Special")
