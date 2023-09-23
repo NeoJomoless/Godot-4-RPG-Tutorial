@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ck0wnnh4233eh"]
+[gd_scene load_steps=8 format=3 uid="uid://ck0wnnh4233eh"]
 
 [ext_resource type="Texture2D" uid="uid://dlbxvt1oawb8v" path="res://icon.svg" id="1_2bwge"]
 [ext_resource type="PackedScene" uid="uid://cdkrwn56sckey" path="res://Player/Player.tscn" id="2_epinq"]
 [ext_resource type="PackedScene" uid="uid://btda7wrqs3hhr" path="res://Enemy/Skeleton.tscn" id="3_7bxol"]
+[ext_resource type="PackedScene" uid="uid://cbo7r7kfd54m" path="res://Enemy/Boss/BossHealthBar.tscn" id="4_us1h4"]
+[ext_resource type="PackedScene" uid="uid://big3l13dnpmd0" path="res://Enemy/Boss/Orc.tscn" id="5_5a6w1"]
+[ext_resource type="PackedScene" path="res://Player/PlayerHealthUI.tscn" id="6_bh7ip"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_hxxpg"]
 
@@ -19,5 +22,16 @@ parameters/playback = SubResource("AnimationNodeStateMachinePlayback_hxxpg")
 
 [node name="Skeleton" parent="." instance=ExtResource("3_7bxol")]
 position = Vector2(-173, -22)
+
+[node name="BossHealthBar" parent="." instance=ExtResource("4_us1h4")]
+
+[node name="Boss" parent="." instance=ExtResource("5_5a6w1")]
+position = Vector2(224, 131)
+Speed = 30
+health = 20
+knockback_strength = 150
+attackpow = 0
+
+[node name="PlayerHealthUI" parent="." instance=ExtResource("6_bh7ip")]
 
 [editable path="Player"]

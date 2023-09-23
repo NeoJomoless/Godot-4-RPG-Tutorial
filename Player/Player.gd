@@ -26,6 +26,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	Health = PlayerData.Player_Health
+	attackpow = PlayerData.Player_Damage
+	
 	if Health <= 0:
 		Death()
 	

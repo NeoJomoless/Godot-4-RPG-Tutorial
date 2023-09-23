@@ -1,7 +1,6 @@
-[gd_scene load_steps=31 format=3 uid="uid://btda7wrqs3hhr"]
+[gd_scene load_steps=30 format=3 uid="uid://btda7wrqs3hhr"]
 
 [ext_resource type="PackedScene" uid="uid://d4c6udlvrac8r" path="res://Enemy/Enemy.tscn" id="1_mnxbd"]
-[ext_resource type="Script" path="res://Enemy/Enemy.gd" id="2_f6tub"]
 [ext_resource type="Texture2D" uid="uid://bgkrq03lq0pf8" path="res://Art/Enemy 04-1.png" id="2_m17aq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_32bhg"]
@@ -237,10 +236,6 @@ radius = 114.004
 radius = 15.7126
 
 [node name="Skeleton" instance=ExtResource("1_mnxbd")]
-script = ExtResource("2_f6tub")
-Speed = 40
-health = 4
-knockback_strength = 100
 attackpow = 0
 
 [node name="CollisionShape2D" parent="." index="0"]

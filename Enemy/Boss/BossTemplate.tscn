@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3lktxfj7bj78"]
+
+[ext_resource type="Script" path="res://Enemy/Bosses/BossTemplate.gd" id="1_wu67r"]
+
+[node name="BossTemplate" type="CharacterBody2D"]
+script = ExtResource("1_wu67r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AttackDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDetector"]
+
+[node name="AttackBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+
+[connection signal="body_entered" from="AttackDetector" to="." method="_on_attack_detector_body_entered"]
+[connection signal="body_exited" from="AttackDetector" to="." method="_on_attack_detector_body_exited"]
+[connection signal="area_entered" from="AttackBox" to="." method="_on_attack_box_area_entered"]
