@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2o6j2au2f41m"]
+
+[ext_resource type="Script" path="res://NPC/EventTrigger.gd" id="1_81v5v"]
+
+[node name="EventTrigger" type="Area2D"]
+script = ExtResource("1_81v5v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

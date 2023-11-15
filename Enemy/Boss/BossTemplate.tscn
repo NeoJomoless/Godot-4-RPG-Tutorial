@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://b3lktxfj7bj78"]
 
-[ext_resource type="Script" path="res://Enemy/Bosses/BossTemplate.gd" id="1_wu67r"]
+[ext_resource type="Script" path="res://Enemy/Boss/BossTemplate.gd" id="1_l6w37"]
 
-[node name="BossTemplate" type="CharacterBody2D"]
-script = ExtResource("1_wu67r")
+[node name="BossTemplate" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_l6w37")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -19,6 +19,12 @@ script = ExtResource("1_wu67r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
 
+[node name="AttackProx" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackProx"]
+
 [connection signal="body_entered" from="AttackDetector" to="." method="_on_attack_detector_body_entered"]
 [connection signal="body_exited" from="AttackDetector" to="." method="_on_attack_detector_body_exited"]
 [connection signal="area_entered" from="AttackBox" to="." method="_on_attack_box_area_entered"]
+[connection signal="body_entered" from="AttackProx" to="." method="_on_attack_prox_body_entered"]
+[connection signal="body_exited" from="AttackProx" to="." method="_on_attack_prox_body_exited"]

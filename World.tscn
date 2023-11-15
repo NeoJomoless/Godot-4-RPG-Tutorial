@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ck0wnnh4233eh"]
+[gd_scene load_steps=9 format=3 uid="uid://ck0wnnh4233eh"]
 
 [ext_resource type="Texture2D" uid="uid://dlbxvt1oawb8v" path="res://icon.svg" id="1_2bwge"]
 [ext_resource type="PackedScene" uid="uid://cdkrwn56sckey" path="res://Player/Player.tscn" id="2_epinq"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cbo7r7kfd54m" path="res://Enemy/Boss/BossHealthBar.tscn" id="4_us1h4"]
 [ext_resource type="PackedScene" uid="uid://big3l13dnpmd0" path="res://Enemy/Boss/Orc.tscn" id="5_5a6w1"]
 [ext_resource type="PackedScene" path="res://Player/PlayerHealthUI.tscn" id="6_bh7ip"]
+[ext_resource type="PackedScene" uid="uid://dwfqsbgdr56do" path="res://NPC/Knight.tscn" id="7_qjjf1"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_hxxpg"]
 
@@ -16,6 +17,7 @@ position = Vector2(166, -97)
 texture = ExtResource("1_2bwge")
 
 [node name="Player" parent="." instance=ExtResource("2_epinq")]
+attackpow = 1
 
 [node name="AnimationTree" parent="Player" index="4"]
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_hxxpg")
@@ -33,5 +35,8 @@ knockback_strength = 150
 attackpow = 0
 
 [node name="PlayerHealthUI" parent="." instance=ExtResource("6_bh7ip")]
+
+[node name="Knight" parent="." instance=ExtResource("7_qjjf1")]
+position = Vector2(-92, 128)
 
 [editable path="Player"]

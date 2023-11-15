@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://dknt2qcrsn7qe"]
+
+[ext_resource type="Script" path="res://Menus/NPCMenu.gd" id="1_cwwns"]
+
+[node name="NPCMenu" type="CanvasLayer"]
+script = ExtResource("1_cwwns")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 3.0
+offset_top = 544.0
+offset_right = 43.0
+offset_bottom = 584.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Follow" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Follow me!"
+
+[node name="Dismiss" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Dismiss"
+
+[node name="Exit" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="Panel/VBoxContainer/Follow" to="." method="_on_follow_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Dismiss" to="." method="_on_dismiss_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

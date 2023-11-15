@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Enemy/Enemy.gd" id="1_228s6"]
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_228s6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

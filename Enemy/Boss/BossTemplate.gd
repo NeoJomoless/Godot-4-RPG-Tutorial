@@ -23,7 +23,6 @@ signal setname(string)
 
 func _ready():
 	var player = get_parent().get_node("Player")
-	player.enemy_attacked.connect(change_healthbar)
 	emit_signal("sethealthbar", health)
 	emit_signal("setname", Boss_Name)
 	emit_signal("bosshealth_changed", health)
@@ -75,7 +74,14 @@ func _on_attack_box_area_entered(area):
 	if area.is_in_group("Projectile"):
 		var proj = get_parent().get_node("Projectile")
 		if proj != null:
-			proj.enemy_attacked.connect(change_healthbar)
+			health -= proj.ProjDamage
+			knockback = proj.ProjKnockback * proj.movedir
+			change_healthbar()
+	if area.is_in_group("Melee"):
+		var attacker = area.get_parent().get_parent()
+		health -= attacker.attackpow
+		knockback = attacker.knockback_strength * attacker.knockback_dir
+		change_healthbar()
 
 
 func _on_attack_prox_body_entered(body):

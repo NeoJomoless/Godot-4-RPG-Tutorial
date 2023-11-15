@@ -19,7 +19,7 @@ var is_moving = false
 var is_attacking = false
 
 signal health_changed(value)
-signal enemy_attacked
+signal follower_interacted
 
 func _ready():
 	animTree.active = true
@@ -51,6 +51,10 @@ func _physics_process(delta):
 			animTree.set("parameters/Attack2/blend_position", input_vector)
 			animTree.set("parameters/Attack3/blend_position", input_vector)
 			animTree.set("parameters/Cast/blend_position", input_vector) #new for spells and thief attacks
+		
+		if Input.is_action_pressed("interact"):
+			emit_signal("follower_interacted")
+		
 		move()
 	attack_combo()
 
